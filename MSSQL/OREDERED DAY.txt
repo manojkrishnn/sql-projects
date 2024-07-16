@@ -1,0 +1,13 @@
+** AUTHOR	: MANOJ K
+** DATE 	: 18-06-2024
+** PRO.NAME	: GET THE ORDERED DAY OF THE SALES ORDER.
+**SQL QUERY	:
+			
+			select salesorderid, orderdate, DATENAME(weekday,orderdate) as ordered_day 
+				from sales.SalesOrderHeader 
+					order by SalesOrderID DESC;
+					
+**DESCRIPTION	
+				HERE OUR OBJECTIVE IS TO GET THE DAY OF ORDERED DATE.
+				So i used date function called 'DATENAME' to get the day of orderdate
+				Arranged table using salesorderid as a key column

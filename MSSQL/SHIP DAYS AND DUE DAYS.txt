@@ -1,0 +1,31 @@
+
+** AUTHOR	: MANOJ K
+** DATE 	: 18-06-2024
+** PRO.NAME	: QUERY TO GET SHIPPING DAYS AND DUE DAYS  FOR AN SALAES ORDER WITH TYPES OF PARTS AND THIER TOTAL QUANTITY
+** QUERY	:
+
+			WITH TOTAL_QUANTITY AS (SELECT SalesOrderID, SUM(OrderQty) AS TOTAL_QUANTITY , COUNT(SalesOrderDetailID)AS TYPES_OF_PARTS  
+										FROM SALES.SalesOrderDetail 
+											GROUP  BY SalesOrderID )
+
+			select H.SalesOrderID, G.TYPES_OF_PARTS, G.TOTAL_QUANTITY, OrderDate, DueDate, ShipDate ,
+			
+					DATEDIFF(DAY, OrderDate,ShipDate) AS Days_for_dispatch,
+					
+					DATEDIFF(day, OrderDate,DueDate) as NO_OF_DUE_DAYS, D.CarrierTrackingNumber 
+				
+						from sales.SalesOrderHeader H inner join sales.SalesOrderDetail D 
+							on H.SalesOrderID = D.SalesOrderID
+								INNER JOIN TOTAL_QUANTITY G
+									ON D.SalesOrderID = G.SalesOrderID
+										order by OrderDate ; 
+	
+** DESCRIPTION: 
+			
+				TO acheive the objective i used datediff to find the diff b/w to dates to know the shiping days and due days
+				Additionally i added total quntity and no of parts for a salaes order and carrier tracking number
+				To get these data i used subquery to get a temporary result of aggreagted output.
+				In subquery i sum of order quantity and count of orderdetailid to total quantity and types of parts
+				FOR better readability i used CTE in our query				
+				Now i joined both orderdetail , header and CTE to get the objective results
+				

@@ -1,0 +1,12 @@
+schema - structured frame
+
+
+
+ 1. its a collection of DB objects such as tables , indexs, constraints, procedures, ets
+ 2. like storing all these collection in a container.
+ 3. schema is created based on the four topics.
+	1. grouping (or) logical seperation
+	2. redundancy. 
+	4. managability.
+	3. securtiy. 
+	
